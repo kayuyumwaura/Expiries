@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a9cbfef71d844eda546b50602cfc9c6" Name="Diagram1">
+        <EntityTypeShape EntityType="expiry_regModel.tb_doctors" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="expiry_regModel.tb_icdcodes" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="expiry_regModel.tb_patient_expiries" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="expiry_regModel.tb_race" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="expiry_regModel.tb_users" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="expiry_regModel.tb_wards" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="expiry_regModel.fk_tb_doctor_int" ManuallyRouted="false" />
+        <AssociationConnector Association="expiry_regModel.fk_tb_add_user" ManuallyRouted="false" />
+        <AssociationConnector Association="expiry_regModel.fk_tb_modify_user" ManuallyRouted="false" />
+        <AssociationConnector Association="expiry_regModel.fk_tb_patient_race" ManuallyRouted="false" />
+        <AssociationConnector Association="expiry_regModel.fk_tb_place_of_death_ward" ManuallyRouted="false" />
+        <AssociationConnector Association="expiry_regModel.tb_expiry_icdcodes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

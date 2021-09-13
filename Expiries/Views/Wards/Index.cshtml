@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Expiries.Models.tb_wards>
+
+@{
+    ViewBag.Title = "Wards";
+}
+
+<h2>Wards</h2>
+    @Html.ActionLink("Create New", "Create")
+
+@*<ul class="breadcrumb pull-right">
+    <li><a href="#">Wards</a></li>
+</ul>*@
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <img src="/bin/img/dinosaur.png" />
+    </div>
+    <div class="col-lg-8">
+        <table class="table" id="wardsTable">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ward_id)*@ #
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ward_name)*@ Ward Name
+                </th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ward_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ward_name)
+                    </td>
+                    <td>
+                        @*<a href="@Url.Action("Edit", "Edit", new { id = item.ward_id })" class="btn-sm btn-primary"><i class="icon-pencil icon-white"></i>Edit</a>*@
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ward_id }, new { @class = "btn-sm btn-info" }) |
+                        @*<button class="btn btn-info btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-list"></i></button>*@
+                        @Html.ActionLink("Details", "Details", new { id = item.ward_id }, new { @class = "btn-sm btn-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ward_id }, new { @class = "btn-sm btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready( function () {
+    $('#wardsTable').DataTable();
+} );
+</script>

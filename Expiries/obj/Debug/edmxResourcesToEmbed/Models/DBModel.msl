@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="expiry_regModelStoreContainer" CdmEntityContainer="expiry_regEntities">
+    <EntitySetMapping Name="tb_doctors">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_doctors">
+        <MappingFragment StoreEntitySet="tb_doctors">
+          <ScalarProperty Name="doc_id" ColumnName="doc_id" />
+          <ScalarProperty Name="doc_name" ColumnName="doc_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_icdcodes">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_icdcodes">
+        <MappingFragment StoreEntitySet="tb_icdcodes">
+          <ScalarProperty Name="icd_code" ColumnName="icd_code" />
+          <ScalarProperty Name="icd_name" ColumnName="icd_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_patient_expiries">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_patient_expiries">
+        <MappingFragment StoreEntitySet="tb_patient_expiries">
+          <ScalarProperty Name="expiry_id" ColumnName="expiry_id" />
+          <ScalarProperty Name="expiry_serial_number" ColumnName="expiry_serial_number" />
+          <ScalarProperty Name="hospital_death" ColumnName="hospital_death" />
+          <ScalarProperty Name="date_of_expiry" ColumnName="date_of_expiry" />
+          <ScalarProperty Name="file_number" ColumnName="file_number" />
+          <ScalarProperty Name="patient_name" ColumnName="patient_name" />
+          <ScalarProperty Name="Patient_sex" ColumnName="Patient_sex" />
+          <ScalarProperty Name="patient_age" ColumnName="patient_age" />
+          <ScalarProperty Name="patient_age_type" ColumnName="patient_age_type" />
+          <ScalarProperty Name="race_id" ColumnName="race_id" />
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="place_of_death_other" ColumnName="place_of_death_other" />
+          <ScalarProperty Name="doc_id" ColumnName="doc_id" />
+          <ScalarProperty Name="expiry_comment" ColumnName="expiry_comment" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="add_user" ColumnName="add_user" />
+          <ScalarProperty Name="add_Time" ColumnName="add_Time" />
+          <ScalarProperty Name="modify_user" ColumnName="modify_user" />
+          <ScalarProperty Name="modify_time" ColumnName="modify_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_race">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_race">
+        <MappingFragment StoreEntitySet="tb_race">
+          <ScalarProperty Name="race_id" ColumnName="race_id" />
+          <ScalarProperty Name="race_name" ColumnName="race_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_users">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_users">
+        <MappingFragment StoreEntitySet="tb_users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_wards">
+      <EntityTypeMapping TypeName="expiry_regModel.tb_wards">
+        <MappingFragment StoreEntitySet="tb_wards">
+          <ScalarProperty Name="ward_id" ColumnName="ward_id" />
+          <ScalarProperty Name="ward_name" ColumnName="ward_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tb_expiry_icdcodes" TypeName="expiry_regModel.tb_expiry_icdcodes" StoreEntitySet="tb_expiry_icdcodes">
+      <EndProperty Name="tb_icdcodes">
+        <ScalarProperty Name="icd_code" ColumnName="icd_code" />
+      </EndProperty>
+      <EndProperty Name="tb_patient_expiries">
+        <ScalarProperty Name="expiry_id" ColumnName="expiry_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

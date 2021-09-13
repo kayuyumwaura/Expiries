@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="expiry_regModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tb_doctors">
+    <Key>
+      <PropertyRef Name="doc_id" />
+    </Key>
+    <Property Name="doc_id" Type="Int16" Nullable="false" />
+    <Property Name="doc_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tb_patient_expiries" Relationship="Self.fk_tb_doctor_int" FromRole="tb_doctors" ToRole="tb_patient_expiries" />
+  </EntityType>
+  <EntityType Name="tb_icdcodes">
+    <Key>
+      <PropertyRef Name="icd_code" />
+    </Key>
+    <Property Name="icd_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="icd_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tb_patient_expiries" Relationship="Self.tb_expiry_icdcodes" FromRole="tb_icdcodes" ToRole="tb_patient_expiries" />
+  </EntityType>
+  <EntityType Name="tb_patient_expiries">
+    <Key>
+      <PropertyRef Name="expiry_id" />
+    </Key>
+    <Property Name="expiry_id" Type="Int32" Nullable="false" />
+    <Property Name="expiry_serial_number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_death" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="date_of_expiry" Type="DateTime" Precision="0" />
+    <Property Name="file_number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="patient_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Patient_sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="patient_age" Type="Int16" />
+    <Property Name="patient_age_type" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="race_id" Type="Int16" />
+    <Property Name="ward_id" Type="Int16" />
+    <Property Name="place_of_death_other" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="doc_id" Type="Int16" />
+    <Property Name="expiry_comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="add_user" Type="Int16" />
+    <Property Name="add_Time" Type="DateTime" Precision="3" />
+    <Property Name="modify_user" Type="Int16" />
+    <Property Name="modify_time" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tb_doctors" Relationship="Self.fk_tb_doctor_int" FromRole="tb_patient_expiries" ToRole="tb_doctors" />
+    <NavigationProperty Name="tb_users" Relationship="Self.fk_tb_add_user" FromRole="tb_patient_expiries" ToRole="tb_users" />
+    <NavigationProperty Name="tb_users1" Relationship="Self.fk_tb_modify_user" FromRole="tb_patient_expiries" ToRole="tb_users" />
+    <NavigationProperty Name="tb_race" Relationship="Self.fk_tb_patient_race" FromRole="tb_patient_expiries" ToRole="tb_race" />
+    <NavigationProperty Name="tb_wards" Relationship="Self.fk_tb_place_of_death_ward" FromRole="tb_patient_expiries" ToRole="tb_wards" />
+    <NavigationProperty Name="tb_icdcodes" Relationship="Self.tb_expiry_icdcodes" FromRole="tb_patient_expiries" ToRole="tb_icdcodes" />
+  </EntityType>
+  <EntityType Name="tb_race">
+    <Key>
+      <PropertyRef Name="race_id" />
+    </Key>
+    <Property Name="race_id" Type="Int16" Nullable="false" />
+    <Property Name="race_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tb_patient_expiries" Relationship="Self.fk_tb_patient_race" FromRole="tb_race" ToRole="tb_patient_expiries" />
+  </EntityType>
+  <EntityType Name="tb_users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int16" Nullable="false" />
+    <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tb_patient_expiries" Relationship="Self.fk_tb_add_user" FromRole="tb_users" ToRole="tb_patient_expiries" />
+    <NavigationProperty Name="tb_patient_expiries1" Relationship="Self.fk_tb_modify_user" FromRole="tb_users" ToRole="tb_patient_expiries" />
+  </EntityType>
+  <EntityType Name="tb_wards">
+    <Key>
+      <PropertyRef Name="ward_id" />
+    </Key>
+    <Property Name="ward_id" Type="Int16" Nullable="false" />
+    <Property Name="ward_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tb_patient_expiries" Relationship="Self.fk_tb_place_of_death_ward" FromRole="tb_wards" ToRole="tb_patient_expiries" />
+  </EntityType>
+  <Association Name="fk_tb_doctor_int">
+    <End Role="tb_doctors" Type="Self.tb_doctors" Multiplicity="0..1" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_doctors">
+        <PropertyRef Name="doc_id" />
+      </Principal>
+      <Dependent Role="tb_patient_expiries">
+        <PropertyRef Name="doc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_add_user">
+    <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="tb_patient_expiries">
+        <PropertyRef Name="add_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_modify_user">
+    <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="tb_patient_expiries">
+        <PropertyRef Name="modify_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_patient_race">
+    <End Role="tb_race" Type="Self.tb_race" Multiplicity="0..1" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_race">
+        <PropertyRef Name="race_id" />
+      </Principal>
+      <Dependent Role="tb_patient_expiries">
+        <PropertyRef Name="race_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tb_place_of_death_ward">
+    <End Role="tb_wards" Type="Self.tb_wards" Multiplicity="0..1" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_wards">
+        <PropertyRef Name="ward_id" />
+      </Principal>
+      <Dependent Role="tb_patient_expiries">
+        <PropertyRef Name="ward_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tb_expiry_icdcodes">
+    <End Role="tb_icdcodes" Type="Self.tb_icdcodes" Multiplicity="*" />
+    <End Role="tb_patient_expiries" Type="Self.tb_patient_expiries" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="expiry_regEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_doctors" EntityType="Self.tb_doctors" />
+    <EntitySet Name="tb_icdcodes" EntityType="Self.tb_icdcodes" />
+    <EntitySet Name="tb_patient_expiries" EntityType="Self.tb_patient_expiries" />
+    <EntitySet Name="tb_race" EntityType="Self.tb_race" />
+    <EntitySet Name="tb_users" EntityType="Self.tb_users" />
+    <EntitySet Name="tb_wards" EntityType="Self.tb_wards" />
+    <AssociationSet Name="fk_tb_doctor_int" Association="Self.fk_tb_doctor_int">
+      <End Role="tb_doctors" EntitySet="tb_doctors" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_add_user" Association="Self.fk_tb_add_user">
+      <End Role="tb_users" EntitySet="tb_users" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_modify_user" Association="Self.fk_tb_modify_user">
+      <End Role="tb_users" EntitySet="tb_users" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_patient_race" Association="Self.fk_tb_patient_race">
+      <End Role="tb_race" EntitySet="tb_race" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tb_place_of_death_ward" Association="Self.fk_tb_place_of_death_ward">
+      <End Role="tb_wards" EntitySet="tb_wards" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+    <AssociationSet Name="tb_expiry_icdcodes" Association="Self.tb_expiry_icdcodes">
+      <End Role="tb_icdcodes" EntitySet="tb_icdcodes" />
+      <End Role="tb_patient_expiries" EntitySet="tb_patient_expiries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
